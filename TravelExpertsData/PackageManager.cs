@@ -58,6 +58,30 @@ namespace TravelExpertsData
             }
         }
 
+
+        public static void ModifyPackage(Package newPackage)
+        {
+            Package oldPackage;
+            using(TravelExperContext db = new TravelExperContext())
+            {
+                oldPackage = db.Packages.Find(newPackage.PackageId);
+                CopyPackageData(oldPackage, newPackage);
+                db.SaveChanges();
+            }
+        }
+
+        private static void CopyPackageData(Package oldPackage, Package newPackage)
+        {
+            if(oldPackage!= null && newPackage!= null)
+            {
+                oldPackage.PkgName = newPackage.PkgName;
+                oldPackage.PkgStartDate = newPackage.PkgStartDate;
+                oldPackage.PkgEndDate = newPackage.PkgEndDate;
+                oldPackage.PkgDesc = newPackage.PkgDesc;
+                oldPackage.PkgBasePrice = newPackage.PkgBasePrice;
+                oldPackage.PkgAgencyCommission = newPackage.PkgAgencyCommission;
+            }
+        }
     }//Class
 
 

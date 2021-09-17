@@ -22,6 +22,7 @@ namespace Workshop_3
         private Product selectedProduct;
 
         private Package packageToAdd;
+        private Product productToAdd;
 
         public mainForm()
         {
@@ -30,13 +31,56 @@ namespace Workshop_3
 
         private void mainForm_Load(object sender, EventArgs e)
         {
-            DisplayPackages();
+            /*DisplayPackages();*/
+        }
+
+        //Section of Code to set up data grid view and associated funtion to prepare Datagrid for Data source change.
+        private void dgViewSetup()
+        {
+            //DataGridView styling
+            dgView.EnableHeadersVisualStyles = false;
+            dgView.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
+            dgView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgView.AlternatingRowsDefaultCellStyle.BackColor = Color.BlanchedAlmond;
+            dgView.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            //Adding Modify and Delete button rows
+
+            DataGridViewButtonColumn modifyColumn = new DataGridViewButtonColumn();
+            modifyColumn.HeaderText = "";
+            modifyColumn.UseColumnTextForButtonValue = true;
+            modifyColumn.Text = "Modify";
+            dgView.Columns.Add(modifyColumn);
+
+
+            DataGridViewButtonColumn deleteColumn = new DataGridViewButtonColumn();
+            deleteColumn.HeaderText = "";
+            deleteColumn.UseColumnTextForButtonValue = true;
+            deleteColumn.Text = "Delete";
+            dgView.Columns.Add(deleteColumn);
+
+        }
+        private void deleteCoulumns()
+        {
+            dgView.AutoGenerateColumns = true;
+            dgView.Columns.Clear();
+            dgView.DataSource = null;
         }
 
 
+        private void btnPackages_Click(object sender, EventArgs e)
+        {
+            deleteCoulumns();
+            DisplayPackages();
+        }
+        private void btnProducts_Click(object sender, EventArgs e)
+        {
+            deleteCoulumns();
+            DisplayProducts();
+        }
         private void DisplayPackages()
         {
-
+            deleteCoulumns();
             //Get Packages
             packages = PackageManager.GetPackages();
 
@@ -80,46 +124,10 @@ namespace Workshop_3
 
         }
 
-        private void dgViewSetup()
-        {
-            //DataGridView styling
-            dgView.EnableHeadersVisualStyles = false;
-            dgView.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
-            dgView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgView.AlternatingRowsDefaultCellStyle.BackColor = Color.BlanchedAlmond;
-            dgView.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            //Adding Modify and Delete button rows
-
-            DataGridViewButtonColumn modifyColumn = new DataGridViewButtonColumn();
-            modifyColumn.HeaderText = "";
-            modifyColumn.UseColumnTextForButtonValue = true;
-            modifyColumn.Text = "Modify";
-            dgView.Columns.Add(modifyColumn);
-
-
-            DataGridViewButtonColumn deleteColumn = new DataGridViewButtonColumn();
-            deleteColumn.HeaderText = "";
-            deleteColumn.UseColumnTextForButtonValue = true;
-            deleteColumn.Text = "Delete";
-            dgView.Columns.Add(deleteColumn);
-
-        }
-
-        private void btnPackages_Click(object sender, EventArgs e)
-        {
-            deleteCoulumns();
-            DisplayPackages();
-        }
-        private void btnProducts_Click(object sender, EventArgs e)
-        {
-            deleteCoulumns();
-            DisplayProducts();
-        }
-
         private void DisplayProducts()
         {
-            //Get Packages
+            deleteCoulumns();
+            //Get Products
             products = ProductManager.GetProducts();
             //Set DataGridView Datasourse to packages.
             dgView.DataSource = products.ToList();
@@ -153,7 +161,10 @@ namespace Workshop_3
                     selectedPackage = PackageManager.GetPackages(packageID);
                 }
                 if (e.ColumnIndex == ModifyIndex)
+                {
                     label1.Text = $"Modify {selectedPackage.PkgName}";
+                    ModifyPackage(selectedPackage.PackageId);
+                }
                 else if (e.ColumnIndex == DeleteIndex)
                     label1.Text = $"Delete {selectedPackage.PkgName}";
             }
@@ -165,19 +176,70 @@ namespace Workshop_3
                     selectedProduct = ProductManager.GetProduct(productID);
                 }
                 if (e.ColumnIndex == ModifyIndex)
+                {
                     label1.Text = $"Modify {selectedProduct.ProdName}";
+                    ModifyProduct(selectedProduct.ProductId);
+                }
                 else if (e.ColumnIndex == DeleteIndex)
                     label1.Text = $"Delete {selectedProduct.ProdName}";
             }
             
         }
 
-        private void deleteCoulumns()
+     
+
+        //Section of code with Add and Modify package functions
+        private void AddPackage()
         {
-            dgView.AutoGenerateColumns = true;
-            dgView.Columns.Clear();
-            dgView.DataSource = null;
+            frmAddModifyPackage addForm = new frmAddModifyPackage
+            {
+                isAdd = true
+            };
+            DialogResult result = addForm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                this.packageToAdd = addForm.package;
+                try
+                {
+                    PackageManager.AddPackage(packageToAdd);
+                    DisplayPackages();
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show($"Error when adding package: {ex.Message}",
+                                    ex.GetType().ToString());
+                }
+
+            }
+
         }
+        private void ModifyPackage(int packageId)
+        {
+            frmAddModifyPackage modifyForm = new frmAddModifyPackage();
+            modifyForm.isAdd = false;
+            modifyForm.package = this.selectedPackage;
+            DialogResult result = modifyForm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                this.packageToAdd = modifyForm.package;
+                try
+                {
+                    PackageManager.ModifyPackage(packageToAdd);
+                    DisplayPackages();
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show($"Error when modifying package: {ex.Message}",
+                                    ex.GetType().ToString());
+                }
+
+            }
+        }
+
+
+       
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -185,48 +247,75 @@ namespace Workshop_3
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            frmAddModifyItem addForm = new frmAddModifyItem();
-            if (selectedTable == null)
+                if(selectedTable != null)
             {
-                MessageBox.Show("Please select a table to Add new Item");
-                return;
-            }
-            else {
-                addForm.selectedTable = selectedTable;
-            }
-            DialogResult result = addForm.ShowDialog();
-
-            /*if(selectedTable == "Packages")
-            {
-                if (result == DialogResult.OK)
+                switch (selectedTable)
                 {
-                    this.packageToAdd = addForm.Package; // new customer data
-                    try
-                    {
-                        CustomerManager.Add(customer);
-                        DisplayCustomer();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error when adding customer: {ex.Message}",
-                                        ex.GetType().ToString());
-                    }
+                    case ("Packages"):
+                        AddPackage();
+                        break;
+                    //Add case below
+                    case ("Products"):
+                        AddProduct();
+                        break;
                 }
+
             }
+                else
+            {
+                MessageBox.Show("Please select a table to add the record!");
+            }
+        }
+
+        private void AddProduct()
+        {
+            frmAddModifyProducts addProduct = new frmAddModifyProducts();
+            addProduct.isAdd = true;
+            DialogResult result = addProduct.ShowDialog();
             if (result == DialogResult.OK)
             {
-                this.customer = addForm.customer; // new customer data
+                this.productToAdd = addProduct.product;
                 try
                 {
-                    CustomerManager.Add(customer);
-                    DisplayCustomer();
+                    ProductManager.AddProduct(productToAdd);
+                    DisplayProducts();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error when adding customer: {ex.Message}",
+
+                    MessageBox.Show($"Error when adding product: {ex.Message}",
                                     ex.GetType().ToString());
                 }
-            }*/
+
+            }
+
+        }
+        private void ModifyProduct(int productId)
+        {
+            frmAddModifyProducts modifyProduct = new frmAddModifyProducts();
+            modifyProduct.isAdd = false;
+            modifyProduct.product = this.selectedProduct;
+            DialogResult result = modifyProduct.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                this.productToAdd = modifyProduct.product;
+                try
+                {
+                    ProductManager.ModifyProduct(productToAdd);
+                    DisplayProducts();
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show($"Error when modifying product: {ex.Message}",
+                                    ex.GetType().ToString());
+                }
+
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
 
         }
     }
