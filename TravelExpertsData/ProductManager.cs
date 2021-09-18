@@ -42,5 +42,34 @@ namespace TravelExpertsData
             }
             return selectedPropduct;
         }
+
+        public static void AddProduct(Product newProduct)
+        {
+            using (TravelExperContext db = new TravelExperContext())
+            {
+                db.Products.Add(newProduct);
+                db.SaveChanges();
+            }
+        }
+
+        public static void ModifyProduct(Product newProduct)
+        {
+            Product oldProduct;
+            using (TravelExperContext db = new TravelExperContext())
+            {
+                oldProduct = db.Products.Find(newProduct.ProductId);
+                CopyProdcutData(oldProduct, newProduct);
+                db.SaveChanges();
+            }
+        }
+
+        private static void CopyProdcutData(Product oldProduct,Product newProduct)
+        {
+            if (oldProduct != null && newProduct != null)
+            {
+                /*oldProduct.ProductId = newProduct.ProductId;*/
+                oldProduct.ProdName = newProduct.ProdName;
+            }
+        }
     }
 }
