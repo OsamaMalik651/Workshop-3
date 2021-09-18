@@ -53,8 +53,9 @@ namespace Workshop_3
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1346, 60);
+            this.panel1.Size = new System.Drawing.Size(1178, 45);
             this.panel1.TabIndex = 0;
             // 
             // panel2
@@ -68,18 +69,20 @@ namespace Workshop_3
             this.panel2.Controls.Add(this.btnPackages);
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(0, 60);
+            this.panel2.Location = new System.Drawing.Point(0, 45);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(250, 902);
+            this.panel2.Size = new System.Drawing.Size(219, 677);
             this.panel2.TabIndex = 1;
             // 
             // btnExit
             // 
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Font = new System.Drawing.Font("Comic Sans MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnExit.Location = new System.Drawing.Point(0, 798);
+            this.btnExit.Location = new System.Drawing.Point(0, 598);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(250, 70);
+            this.btnExit.Size = new System.Drawing.Size(219, 52);
             this.btnExit.TabIndex = 2;
             this.btnExit.Text = "&Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -90,9 +93,10 @@ namespace Workshop_3
             this.button5.Dock = System.Windows.Forms.DockStyle.Top;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Comic Sans MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button5.Location = new System.Drawing.Point(0, 602);
+            this.button5.Location = new System.Drawing.Point(0, 450);
+            this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(250, 70);
+            this.button5.Size = new System.Drawing.Size(219, 52);
             this.button5.TabIndex = 2;
             this.button5.Text = "Packages";
             this.button5.UseVisualStyleBackColor = true;
@@ -102,33 +106,38 @@ namespace Workshop_3
             this.btnProductSupplers.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnProductSupplers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProductSupplers.Font = new System.Drawing.Font("Comic Sans MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnProductSupplers.Location = new System.Drawing.Point(0, 532);
+            this.btnProductSupplers.Location = new System.Drawing.Point(0, 398);
+            this.btnProductSupplers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnProductSupplers.Name = "btnProductSupplers";
-            this.btnProductSupplers.Size = new System.Drawing.Size(250, 70);
+            this.btnProductSupplers.Size = new System.Drawing.Size(219, 52);
             this.btnProductSupplers.TabIndex = 2;
             this.btnProductSupplers.Text = "Product Suppliers";
             this.btnProductSupplers.UseVisualStyleBackColor = true;
+            this.btnProductSupplers.Click += new System.EventHandler(this.btnProductSupplers_Click);
             // 
             // btnSuppliers
             // 
             this.btnSuppliers.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnSuppliers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSuppliers.Font = new System.Drawing.Font("Comic Sans MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnSuppliers.Location = new System.Drawing.Point(0, 462);
+            this.btnSuppliers.Location = new System.Drawing.Point(0, 346);
+            this.btnSuppliers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSuppliers.Name = "btnSuppliers";
-            this.btnSuppliers.Size = new System.Drawing.Size(250, 70);
+            this.btnSuppliers.Size = new System.Drawing.Size(219, 52);
             this.btnSuppliers.TabIndex = 2;
             this.btnSuppliers.Text = "Suppliers";
             this.btnSuppliers.UseVisualStyleBackColor = true;
+            this.btnSuppliers.Click += new System.EventHandler(this.btnSuppliers_Click);
             // 
             // btnProducts
             // 
             this.btnProducts.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProducts.Font = new System.Drawing.Font("Comic Sans MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnProducts.Location = new System.Drawing.Point(0, 392);
+            this.btnProducts.Location = new System.Drawing.Point(0, 294);
+            this.btnProducts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnProducts.Name = "btnProducts";
-            this.btnProducts.Size = new System.Drawing.Size(250, 70);
+            this.btnProducts.Size = new System.Drawing.Size(219, 52);
             this.btnProducts.TabIndex = 2;
             this.btnProducts.Text = "Products";
             this.btnProducts.UseVisualStyleBackColor = true;
@@ -139,9 +148,10 @@ namespace Workshop_3
             this.btnPackages.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnPackages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPackages.Font = new System.Drawing.Font("Comic Sans MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnPackages.Location = new System.Drawing.Point(0, 322);
+            this.btnPackages.Location = new System.Drawing.Point(0, 242);
+            this.btnPackages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPackages.Name = "btnPackages";
-            this.btnPackages.Size = new System.Drawing.Size(250, 70);
+            this.btnPackages.Size = new System.Drawing.Size(219, 52);
             this.btnPackages.TabIndex = 2;
             this.btnPackages.Text = "Packages";
             this.btnPackages.UseVisualStyleBackColor = true;
@@ -152,8 +162,9 @@ namespace Workshop_3
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(250, 322);
+            this.pictureBox1.Size = new System.Drawing.Size(219, 242);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -165,16 +176,18 @@ namespace Workshop_3
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.dgView);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(250, 60);
+            this.panel3.Location = new System.Drawing.Point(219, 45);
+            this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1096, 902);
+            this.panel3.Size = new System.Drawing.Size(959, 677);
             this.panel3.TabIndex = 2;
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(414, 690);
+            this.btnAdd.Location = new System.Drawing.Point(362, 518);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(242, 72);
+            this.btnAdd.Size = new System.Drawing.Size(212, 54);
             this.btnAdd.TabIndex = 2;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -183,9 +196,9 @@ namespace Workshop_3
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(63, 667);
+            this.label1.Location = new System.Drawing.Point(55, 500);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 20);
+            this.label1.Size = new System.Drawing.Size(38, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
@@ -197,23 +210,25 @@ namespace Workshop_3
             this.dgView.AllowUserToResizeRows = false;
             this.dgView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgView.Location = new System.Drawing.Point(37, 20);
+            this.dgView.Location = new System.Drawing.Point(32, 15);
+            this.dgView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgView.MultiSelect = false;
             this.dgView.Name = "dgView";
             this.dgView.RowHeadersWidth = 51;
             this.dgView.RowTemplate.Height = 29;
-            this.dgView.Size = new System.Drawing.Size(1030, 602);
+            this.dgView.Size = new System.Drawing.Size(901, 452);
             this.dgView.TabIndex = 0;
             this.dgView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgView_CellClick);
             // 
             // mainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1346, 962);
+            this.ClientSize = new System.Drawing.Size(1178, 722);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "mainForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.mainForm_Load);
