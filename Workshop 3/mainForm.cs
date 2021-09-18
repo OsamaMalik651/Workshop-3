@@ -14,22 +14,30 @@ namespace Workshop_3
 {
     public partial class mainForm : Form
     {
+
         string selectedTable = null; //Variable to keep track of the selected table
         private int ModifyIndex; // index for the Modify button column
         private int DeleteIndex; // index for the Delete button column
         
+
         List<PackagesDTO> packages;
         List<ProductsDTO> products;
         List<SupplierDTO> suppliers;
         List<ProductsSupplierDTO> productssuppliers;
+        List<PackagesProductsSupplierDTO> packagesproductssuppliers;
+              
         private Package selectedPackage;
         private Product selectedProduct;
         private Supplier selectedSupplier;
-
-
+        private ProductsSupplier selectedProductsSupplier;
+        private PackagesProductsSupplier selectedPackagesProductsSupplier;
+        
         private Package packageToAdd;
         private Product productToAdd;
         private Supplier supplierToAdd;
+        private ProductsSupplier productssupplierToAdd;
+        private PackagesProductsSupplier packagesproductsupplierToAdd;
+       
 
         public mainForm()
         {
@@ -220,7 +228,35 @@ namespace Workshop_3
         }
 
 
+
         //Function for the selection of appropriate selection of tables to modify and delete 
+
+        private void btnPackProdSup_Click(object sender, EventArgs e)
+        {
+            deleteCoulumns();
+            DisplayPackagesProductsSupplier();
+        }
+        private void DisplayPackagesProductsSupplier()
+        {
+            //Get Packages Product Suppliers (Sola Oyatunji)
+            packagesproductssuppliers = PackagesProductsSupplierManager.GetPackagesProductsSupplier();
+            //Set DataGridView Datasourse to Package products supplier.
+            dgView.DataSource = packagesproductssuppliers.ToList();
+
+            dgViewSetup();
+
+            // Format Data Grid View
+            dgView.Columns[0].HeaderText = "Products Supplier Id";
+            dgView.Columns[0].Width = 120;
+
+
+            dgView.Columns[1].HeaderText = "Package Id";
+            dgView.Columns[1].Width = 180;
+
+            ModifyIndex = 2;
+            DeleteIndex = 3;
+        }
+
         private void dgView_CellClick(object sender,
         DataGridViewCellEventArgs e)
         {
@@ -264,6 +300,7 @@ namespace Workshop_3
                 }
                     
             }
+
             else if (selectedTable == "Supplier")
             {
                 if (e.ColumnIndex == ModifyIndex || e.ColumnIndex == DeleteIndex)
@@ -285,6 +322,41 @@ namespace Workshop_3
         }
 
       
+=======
+            //else if (selectedTable == "Product Suppliers")
+            //{
+            //    if (e.ColumnIndex == ModifyIndex || e.ColumnIndex == DeleteIndex)
+            //    {
+            //        int productsSupplierID = Convert.ToInt32(
+            //        dgView.Rows[e.RowIndex].Cells[0].Value.ToString().Trim());
+            //        selectedProductsSupplier = ProductsSupplierManager.GetProductSupplier(productsSupplierID);
+            //    }
+            //    if (e.ColumnIndex == ModifyIndex)
+            //    {
+            //        label1.Text = $"Modify {selectedProductsSupplier.ProdSupName}";
+            //        ModifyProductsSupplier(selectedProductsSupplier.ProductsSupplierId);
+            //    }
+            //    else if (e.ColumnIndex == DeleteIndex)
+            //        label1.Text = $"Delete {selectedProductsSupplier.ProdSupName}";
+            //}
+            //else if (selectedTable == "Package Products Supplier")
+            //{
+            //    if (e.ColumnIndex == ModifyIndex || e.ColumnIndex == DeleteIndex)
+            //    {
+            //        int productID = Convert.ToInt32(
+            //        dgView.Rows[e.RowIndex].Cells[0].Value.ToString().Trim());
+            //        selectedPackagesProductsSupplier = PackagesProductsSupplierManager.GetPackagesProductsSupplier(PackagesProductsSupplierID);
+            //    }
+            //    if (e.ColumnIndex == ModifyIndex)
+            //    {
+            //        label1.Text = $"Modify {selectedPackagesProductsSupplier.ProdName}";
+            //        ModifyPackagesProductsSupplier(selectedPackagesProductsSupplier.PackagesProductsSupplierId);
+            //    }
+            //    else if (e.ColumnIndex == DeleteIndex)
+            //        label1.Text = $"Delete {selectedPackagesProductsSupplier.ProdName}";
+            //}
+
+        }
 
         //Section of code with Add,Modify and Delete package functions.
         private void AddPackage()
@@ -335,7 +407,9 @@ namespace Workshop_3
 
             }
         }
+
         private void DeletePackage(Package package)
+
         {
             if (selectedPackage == null) //No selected product
             {
@@ -346,7 +420,11 @@ namespace Workshop_3
             DialogResult answer = MessageBox.Show($"Are you sure to delete {selectedPackage}?",
                     "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (answer == DialogResult.Yes)              //Confirmed deletion
+               if (answer == DialogResult.Yes)              //Confirmed deletion
+
+    
+        {
+            if (selectedTable != null)
             {
                 try
                 {
@@ -493,6 +571,7 @@ namespace Workshop_3
             }
 
         }
+
         private void DeleteSupplier(Supplier selectedSupplier)
         {
             if (selectedSupplier == null) //No selected Supplier
@@ -562,4 +641,5 @@ namespace Workshop_3
 
             }
         }
+
     }

@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TravelExpertsData
 {
+    /// <summary>
+    /// Sola Oyatunji(repository of methods that retrieves data and change product product supplier table)
+    /// </summary>
     [Table("Packages_Products_Suppliers")]
     [Index(nameof(PackageId), Name = "PackagesPackages_Products_Suppliers")]
     [Index(nameof(ProductSupplierId), Name = "ProductSupplierId")]
