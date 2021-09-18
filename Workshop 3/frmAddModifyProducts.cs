@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TravelExpertsData;
 
+//Made by Osama Malik
 namespace Workshop_3
 {
 
@@ -24,9 +25,11 @@ namespace Workshop_3
 
         private void frmAddModifyProducts_Load(object sender, EventArgs e)
         {
+            txtProductID.ReadOnly = true;
             if (isAdd) //Add
             {
                 this.Text = "Add Product";
+                txtProductID.Text = "auto-generated";
 
             }
             else //Modify
