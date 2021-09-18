@@ -30,5 +30,10 @@ namespace TravelExpertsData
                 return productssuppliers;
             }
         }
+
+        public static ProductsSupplier GetProductSupplier(int productsSupplierID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

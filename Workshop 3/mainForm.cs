@@ -13,19 +13,23 @@ namespace Workshop_3
 {
     public partial class mainForm : Form
     {
-        private int ModifyIndex ; // index for the Modify button column
-        private int DeleteIndex ; // index for the Delete button column
+        private int ModifyIndex; // index for the Modify button column
+        private int DeleteIndex; // index for the Delete button column
         string selectedTable = null;
         List<PackagesDTO> packages;
         List<ProductsDTO> products;
         List<SupplierDTO> suppliers;
         List<ProductsSupplierDTO> productssuppliers;
+        List<PackagesProductsSupplierDTO> packagesproductssuppliers;
         private Package selectedPackage;
         private Product selectedProduct;
-        
+        private ProductsSupplier selectedProductsSupplier;
+        private PackagesProductsSupplier selectedPackagesProductsSupplier;
 
         private Package packageToAdd;
         private Product productToAdd;
+        private ProductsSupplier productssupplierToAdd;
+        private PackagesProductsSupplier packagesproductsupplierToAdd;
 
         public mainForm()
         {
@@ -186,36 +190,60 @@ namespace Workshop_3
             DisplayProductsSupplier();
         }
         private void DisplayProductsSupplier()
-         {
+        {
             //Get Product Suppliers
             productssuppliers = ProductsSupplierManager.GetProductsSupplier();
-             //Set DataGridView Datasourse to products supplier.
-             dgView.DataSource = productssuppliers.ToList();
+            //Set DataGridView Datasourse to products supplier.
+            dgView.DataSource = productssuppliers.ToList();
 
-             dgViewSetup();
+            dgViewSetup();
 
             // Format Data Grid View
-             dgView.Columns[0].HeaderText = "Products Supplier Id";
-             dgView.Columns[0].Width = 120;
+            dgView.Columns[0].HeaderText = "Products Supplier Id";
+            dgView.Columns[0].Width = 120;
 
 
-             dgView.Columns[1].HeaderText = "Product Id";
-             dgView.Columns[1].Width = 180;
+            dgView.Columns[1].HeaderText = "Product Id";
+            dgView.Columns[1].Width = 180;
 
-             dgView.Columns[2].HeaderText = "Supplier Id";
-             dgView.Columns[2].Width = 180;
+            dgView.Columns[2].HeaderText = "Supplier Id";
+            dgView.Columns[2].Width = 180;
 
-             ModifyIndex = 3;
-             DeleteIndex = 4;
+            ModifyIndex = 3;
+            DeleteIndex = 4;
 
-             selectedTable = "Products Supplier";
+            selectedTable = "Products Supplier";
 
-         }
+        }
+        private void btnPackProdSup_Click(object sender, EventArgs e)
+        {
+            deleteCoulumns();
+            DisplayPackagesProductsSupplier();
+        }
+        private void DisplayPackagesProductsSupplier()
+        {
+            //Get Packages Product Suppliers (Sola Oyatunji)
+            packagesproductssuppliers = PackagesProductsSupplierManager.GetPackagesProductsSupplier();
+            //Set DataGridView Datasourse to Package products supplier.
+            dgView.DataSource = packagesproductssuppliers.ToList();
 
+            dgViewSetup();
+
+            // Format Data Grid View
+            dgView.Columns[0].HeaderText = "Products Supplier Id";
+            dgView.Columns[0].Width = 120;
+
+
+            dgView.Columns[1].HeaderText = "Package Id";
+            dgView.Columns[1].Width = 180;
+
+            ModifyIndex = 2;
+            DeleteIndex = 3;
+        }
         private void dgView_CellClick(object sender,
         DataGridViewCellEventArgs e)
         {
-            if(selectedTable == "Packages")
+            if (selectedTable == "Packages")
             {
                 if (e.ColumnIndex == ModifyIndex || e.ColumnIndex == DeleteIndex)
                 {
@@ -231,7 +259,8 @@ namespace Workshop_3
                 else if (e.ColumnIndex == DeleteIndex)
                     label1.Text = $"Delete {selectedPackage.PkgName}";
             }
-            else if(selectedTable == "Products"){
+            else if (selectedTable == "Products")
+            {
                 if (e.ColumnIndex == ModifyIndex || e.ColumnIndex == DeleteIndex)
                 {
                     int productID = Convert.ToInt32(
@@ -246,10 +275,42 @@ namespace Workshop_3
                 else if (e.ColumnIndex == DeleteIndex)
                     label1.Text = $"Delete {selectedProduct.ProdName}";
             }
-            
+            //else if (selectedTable == "Product Suppliers")
+            //{
+            //    if (e.ColumnIndex == ModifyIndex || e.ColumnIndex == DeleteIndex)
+            //    {
+            //        int productsSupplierID = Convert.ToInt32(
+            //        dgView.Rows[e.RowIndex].Cells[0].Value.ToString().Trim());
+            //        selectedProductsSupplier = ProductsSupplierManager.GetProductSupplier(productsSupplierID);
+            //    }
+            //    if (e.ColumnIndex == ModifyIndex)
+            //    {
+            //        label1.Text = $"Modify {selectedProductsSupplier.ProdSupName}";
+            //        ModifyProductsSupplier(selectedProductsSupplier.ProductsSupplierId);
+            //    }
+            //    else if (e.ColumnIndex == DeleteIndex)
+            //        label1.Text = $"Delete {selectedProductsSupplier.ProdSupName}";
+            //}
+            //else if (selectedTable == "Package Products Supplier")
+            //{
+            //    if (e.ColumnIndex == ModifyIndex || e.ColumnIndex == DeleteIndex)
+            //    {
+            //        int productID = Convert.ToInt32(
+            //        dgView.Rows[e.RowIndex].Cells[0].Value.ToString().Trim());
+            //        selectedPackagesProductsSupplier = PackagesProductsSupplierManager.GetPackagesProductsSupplier(PackagesProductsSupplierID);
+            //    }
+            //    if (e.ColumnIndex == ModifyIndex)
+            //    {
+            //        label1.Text = $"Modify {selectedPackagesProductsSupplier.ProdName}";
+            //        ModifyPackagesProductsSupplier(selectedPackagesProductsSupplier.PackagesProductsSupplierId);
+            //    }
+            //    else if (e.ColumnIndex == DeleteIndex)
+            //        label1.Text = $"Delete {selectedPackagesProductsSupplier.ProdName}";
+            //}
+
         }
 
-     
+
 
         //Section of code with Add and Modify package functions
         private void AddPackage()
@@ -302,7 +363,7 @@ namespace Workshop_3
         }
 
 
-       
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -310,7 +371,7 @@ namespace Workshop_3
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-                if(selectedTable != null)
+            if (selectedTable != null)
             {
                 switch (selectedTable)
                 {
@@ -324,7 +385,7 @@ namespace Workshop_3
                 }
 
             }
-                else
+            else
             {
                 MessageBox.Show("Please select a table to add the record!");
             }
@@ -381,5 +442,7 @@ namespace Workshop_3
         {
 
         }
+
+        
     }
 }
