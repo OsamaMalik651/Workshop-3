@@ -18,8 +18,11 @@ namespace Workshop_3
         string selectedTable = null;
         List<PackagesDTO> packages;
         List<ProductsDTO> products;
+        List<SupplierDTO> suppliers;
+        List<ProductsSupplierDTO> productssuppliers;
         private Package selectedPackage;
         private Product selectedProduct;
+        
 
         private Package packageToAdd;
         private Product productToAdd;
@@ -148,6 +151,66 @@ namespace Workshop_3
             selectedTable = "Products";
 
         }
+
+        private void btnSuppliers_Click(object sender, EventArgs e)
+        {
+            deleteCoulumns();
+            DisplaySupplier();
+        }
+        private void DisplaySupplier()
+        {
+            //Get Suppliers
+            suppliers = SupplierManager.GetSuppliers();
+            //Set DataGridView Datasourse to Suppliers.
+            dgView.DataSource = suppliers.ToList();
+
+            dgViewSetup();
+
+            //Format Data Grid View
+            dgView.Columns[0].HeaderText = "Supplier Id";
+            dgView.Columns[0].Width = 120;
+
+
+            dgView.Columns[1].HeaderText = "Supplier Name";
+            dgView.Columns[1].Width = 180;
+
+            ModifyIndex = 2;
+            DeleteIndex = 3;
+
+            selectedTable = "Supplier";
+
+        }
+        private void btnProductSupplers_Click(object sender, EventArgs e)
+        {
+            deleteCoulumns();
+            DisplayProductsSupplier();
+        }
+        private void DisplayProductsSupplier()
+         {
+            //Get Product Suppliers
+            productssuppliers = ProductsSupplierManager.GetProductsSupplier();
+             //Set DataGridView Datasourse to products supplier.
+             dgView.DataSource = productssuppliers.ToList();
+
+             dgViewSetup();
+
+            // Format Data Grid View
+             dgView.Columns[0].HeaderText = "Products Supplier Id";
+             dgView.Columns[0].Width = 120;
+
+
+             dgView.Columns[1].HeaderText = "Product Id";
+             dgView.Columns[1].Width = 180;
+
+             dgView.Columns[2].HeaderText = "Supplier Id";
+             dgView.Columns[2].Width = 180;
+
+             ModifyIndex = 3;
+             DeleteIndex = 4;
+
+             selectedTable = "Products Supplier";
+
+         }
 
         private void dgView_CellClick(object sender,
         DataGridViewCellEventArgs e)
