@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Made by Osama Malik
 namespace TravelExpertsData
 {/// <summary>
 /// Repository of methods that retrieves data and change Packages Table
@@ -28,8 +29,7 @@ namespace TravelExpertsData
                     PkgDesc = p.PkgDesc,
                     PkgBasePrice = p.PkgBasePrice,
                     PkgAgencyCommission = p.PkgAgencyCommission
-                })
-                .ToList();
+                }).ToList();
             }
             return packages;
         }
@@ -48,7 +48,10 @@ namespace TravelExpertsData
             }
             return selectedPackage;
         }
-
+        /// <summary>
+        /// Method to Add a package to the database.
+        /// </summary>
+        /// <param name="newPackage">new package to be added to database.</param>
         public static void AddPackage(Package newPackage)
         {
             using(TravelExperContext db = new TravelExperContext())
@@ -58,7 +61,10 @@ namespace TravelExpertsData
             }
         }
 
-
+        /// <summary>
+        /// Method to modify the package details in the database.
+        /// </summary>
+        /// <param name="newPackage">Package with the new details</param>
         public static void ModifyPackage(Package newPackage)
         {
             Package oldPackage;
@@ -70,6 +76,11 @@ namespace TravelExpertsData
             }
         }
 
+        /// <summary>
+        /// Function to copy new details to existing package.
+        /// </summary>
+        /// <param name="oldPackage">Package with the current details</param>
+        /// <param name="newPackage">Package withe new details.</param>
         private static void CopyPackageData(Package oldPackage, Package newPackage)
         {
             if(oldPackage!= null && newPackage!= null)
@@ -80,6 +91,18 @@ namespace TravelExpertsData
                 oldPackage.PkgDesc = newPackage.PkgDesc;
                 oldPackage.PkgBasePrice = newPackage.PkgBasePrice;
                 oldPackage.PkgAgencyCommission = newPackage.PkgAgencyCommission;
+            }
+        }
+        /// <summary>
+        /// Method to remove a package from the database.
+        /// </summary>
+        /// <param name="selectedPackage">Package to be removed from the database.</param>
+        public static void RemovePackage(Package selectedPackage)
+        {
+            using(TravelExperContext db = new TravelExperContext())
+            {
+                db.Packages.Remove(selectedPackage);
+                db.SaveChanges();
             }
         }
     }//Class

@@ -19,17 +19,65 @@ namespace TravelExpertsData
         public static List<SupplierDTO> GetSuppliers()
         {
             List<SupplierDTO> suppliers;
-            using(TravelExperContext db = new TravelExperContext())
+            using (TravelExperContext db = new TravelExperContext())
             {
                 suppliers = db.Suppliers.Select(s => new SupplierDTO
                 {
-                    SupplierId= s.SupplierId,
+                    SupplierId = s.SupplierId,
                     SupName = s.SupName,
-                    
+
                 }).ToList();
                 return suppliers;
             }
-            
+
+        }
+        public static Supplier GetSupplier(int supplierId)
+        {
+            Supplier selectedSupplier = null;
+            using (TravelExperContext db = new TravelExperContext())
+            {
+                selectedSupplier = db.Suppliers.Find(supplierId);
+            }
+            return selectedSupplier;
+        }
+
+        public static void AddSupplier(Supplier supplierToAdd)
+        {
+
+            using (TravelExperContext db = new TravelExperContext())
+            {
+                db.Suppliers.Add(supplierToAdd);
+                db.SaveChanges();
+            }
+        }
+
+        public static void ModifySupplier(Supplier supplierToAdd)
+        {
+            Supplier oldSupplier;
+            using (TravelExperContext db = new TravelExperContext())
+            {
+                oldSupplier = db.Suppliers.Find(supplierToAdd.SupplierId);
+                CopySupplierData(oldSupplier, supplierToAdd);
+                db.SaveChanges();
+            }
+        }
+
+        private static void CopySupplierData(Supplier oldSupplier, Supplier supplierToAdd)
+        {
+            if (oldSupplier != null && supplierToAdd != null)
+            {
+
+                oldSupplier.SupName = supplierToAdd.SupName;
+            }
+        }
+
+        public static void RemoveSupplier(Supplier selectedSupplier)
+        {
+            using (TravelExperContext db = new TravelExperContext())
+            {
+                db.Suppliers.Remove(selectedSupplier);
+                db.SaveChanges();
+            }
         }
     }
 }
