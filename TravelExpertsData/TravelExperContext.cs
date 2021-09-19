@@ -47,7 +47,7 @@ namespace TravelExpertsData
 
                 //optionsBuilder.UseSqlServer("Data Source=SAIT224513\\SQLEXPRESS;\nInitial Catalog=TravelExperts;\nIntegrated Security=True");
 
-                optionsBuilder.UseSqlServer("Data Source=SOLA\\SQLEXPRESS;\nInitial Catalog=TravelExperts;\nIntegrated Security=True");
+                optionsBuilder.UseSqlServer("Data Source=LAPTOP-RK06UI3M;\nInitial Catalog=TravelExperts;\nIntegrated Security=True");
 
             }
         }

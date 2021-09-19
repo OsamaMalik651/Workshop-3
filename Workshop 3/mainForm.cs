@@ -321,8 +321,6 @@ namespace Workshop_3
 
         }
 
-      
-=======
             //else if (selectedTable == "Product Suppliers")
             //{
             //    if (e.ColumnIndex == ModifyIndex || e.ColumnIndex == DeleteIndex)
@@ -356,7 +354,7 @@ namespace Workshop_3
             //        label1.Text = $"Delete {selectedPackagesProductsSupplier.ProdName}";
             //}
 
-        }
+        //}
 
         //Section of code with Add,Modify and Delete package functions.
         private void AddPackage()
@@ -416,34 +414,32 @@ namespace Workshop_3
                 MessageBox.Show("There is no package selected", "Delete Error");
                 return;
             }
-        // get confirmation before delete
+            // get confirmation before delete
             DialogResult answer = MessageBox.Show($"Are you sure to delete {selectedPackage}?",
                     "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-               if (answer == DialogResult.Yes)              //Confirmed deletion
-
-    
-        {
-            if (selectedTable != null)
+            if (answer == DialogResult.Yes)              //Confirmed deletion
             {
-                try
+                if (selectedTable != null)
                 {
-                    PackageManager.RemovePackage(selectedPackage);      //Delete the product from the database     
-                    DisplayPackages();                                  //Display the updated products table.
+                    try
+                    {
+                        PackageManager.RemovePackage(selectedPackage);      //Delete the product from the database     
+                        DisplayPackages();                                  //Display the updated products table.
 
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show($"Error when deleting customer: {ex.Message}", ex.GetType().ToString()); //Display error if unable to delete the product.
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-
-                    MessageBox.Show($"Error when deleting customer: {ex.Message}", ex.GetType().ToString()); //Display error if unable to delete the product.
+                    MessageBox.Show("Deletion cancelled");
                 }
             }
-            else
-            {
-                MessageBox.Show("Deletion cancelled");
-            }
-    }
-
+        }
         //Section of code with Add, Modify and Delete Product Functions.
         private void AddProduct()
         {
