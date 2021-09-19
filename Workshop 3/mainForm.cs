@@ -1,4 +1,4 @@
-﻿using TravelExpertsData;
+using TravelExpertsData;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -319,16 +319,6 @@ namespace Workshop_3
 
             }
 
-      
-=======
-      
-=======
-      
-=======
-      
-=======
-      
-=======
             //else if (selectedTable == "Product Suppliers")
             //{
             //    if (e.ColumnIndex == ModifyIndex || e.ColumnIndex == DeleteIndex)
@@ -361,8 +351,8 @@ namespace Workshop_3
             //    else if (e.ColumnIndex == DeleteIndex)
             //        label1.Text = $"Delete {selectedPackagesProductsSupplier.ProdName}";
             //}
-
         }
+
 
         //Section of code with Add,Modify and Delete package functions.
         private void AddPackage()
@@ -424,9 +414,8 @@ namespace Workshop_3
             }
             // get confirmation before delete
             DialogResult answer = MessageBox.Show($"Are you sure to delete {selectedPackage}?",
+                    "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (answer == DialogResult.Yes)              //Confirmed deletion
-
-
             {
                 if (selectedTable != null)
                 {
@@ -434,11 +423,11 @@ namespace Workshop_3
                     {
                         PackageManager.RemovePackage(selectedPackage);      //Delete the product from the database     
                         DisplayPackages();                                  //Display the updated products table.
-                    PackageManager.RemovePackage(selectedPackage);      //Delete the product from the database     
-                    DisplayPackages();                                  //Display the updated products table.
 
                     }
                     catch (Exception ex)
+                    {
+
                         MessageBox.Show($"Error when deleting customer: {ex.Message}", ex.GetType().ToString()); //Display error if unable to delete the product.
                     }
                 }
@@ -450,8 +439,6 @@ namespace Workshop_3
         
         }
             //Section of code with Add, Modify and Delete Product Functions.
-
-        //Section of code with Add, Modify and Delete Product Functions.
         private void AddProduct()
             {
                 frmAddModifyProducts addProduct = new frmAddModifyProducts();
