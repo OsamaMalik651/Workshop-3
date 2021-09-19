@@ -415,10 +415,7 @@ namespace Workshop_3
             // get confirmation before delete
             DialogResult answer = MessageBox.Show($"Are you sure to delete {selectedPackage}?",
                     "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
             if (answer == DialogResult.Yes)              //Confirmed deletion
-
-
             {
                 if (selectedTable != null)
                 {
