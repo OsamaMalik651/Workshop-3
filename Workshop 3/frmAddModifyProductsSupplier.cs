@@ -73,7 +73,7 @@ namespace Workshop_3
                 }
                 else
                     prodsupID = true;
-                bool sup
+                
                 //if (IDPresent)
                 //{
                 //    label5.Text = "Product Id already present";
