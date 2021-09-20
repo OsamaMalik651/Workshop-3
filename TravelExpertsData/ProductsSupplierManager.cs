@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TravelExpertsData
 {
     /// <summary>
-    /// Tracy Crape - repositroy of methods that retrieve data and change Supplier table
+    /// Tracy Crape - repository of methods that retrieve data and change Supplier table
     /// </summary>
     public static class ProductsSupplierManager
     {
@@ -16,7 +16,7 @@ namespace TravelExpertsData
         /// </summary>
         /// <param name="id">productsupplierid</param>
         /// <returns>ProductsSupplier object or null if not found</returns>
-        public static List<ProductsSupplierDTO> GetProductsSupplier()
+        public static List<ProductsSupplierDTO> GetProductsSuppliers()
         {
             List<ProductsSupplierDTO> productssuppliers;
             using (TravelExperContext db = new TravelExperContext())
@@ -32,6 +32,21 @@ namespace TravelExpertsData
         }
 
         public static ProductsSupplier GetProductSupplier(int productsSupplierID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void AddProductsSupplier(ProductsSupplier productssupplierToAdd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void ModifyProductsSupplier(ProductsSupplier productssupplierToAdd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void RemoveProductsSupplier(ProductsSupplier selectedProductsSupplier)
         {
             throw new NotImplementedException();
         }
