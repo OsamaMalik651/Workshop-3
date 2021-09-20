@@ -333,25 +333,26 @@ namespace Workshop_3
                 {
                     DeleteProductsSuppliers(selectedProductsSupplier);
                 }
-
-        //Section of code with Add,Modify and Delete package functions.
-        private void AddPackage()
-        {
-            frmAddModifyPackage addForm = new frmAddModifyPackage
+            }
+        }
+            //Section of code with Add,Modify and Delete package functions.
+            private void AddPackage()
             {
-                isAdd = true
-            };
-            DialogResult result = addForm.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                this.packageToAdd = addForm.package;
-                try
+                frmAddModifyPackage addForm = new frmAddModifyPackage
                 {
-                    PackageManager.AddPackage(packageToAdd);
-                    DisplayPackages();
-                }
-                catch (Exception ex)
+                    isAdd = true
+                };
+                DialogResult result = addForm.ShowDialog();
+                if (result == DialogResult.OK)
                 {
+                    this.packageToAdd = addForm.package;
+                    try
+                    {
+                        PackageManager.AddPackage(packageToAdd);
+                        DisplayPackages();
+                    }
+                    catch (Exception ex)
+                    {
 
                         MessageBox.Show($"Error when adding package: {ex.Message}",
                                         ex.GetType().ToString());
@@ -381,44 +382,44 @@ namespace Workshop_3
                                         ex.GetType().ToString());
                     }
 
+                }
             }
-        }
-        private void DeletePackage(Package package)
-        {
-            if (selectedPackage == null) //No selected product
+            private void DeletePackage(Package package)
             {
-                MessageBox.Show("There is no package selected", "Delete Error");
-                return;
-            }
-            // get confirmation before delete
-            DialogResult answer = MessageBox.Show($"Are you sure to delete {selectedPackage.PkgName}?",
-                    "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (answer == DialogResult.Yes)              //Confirmed deletion
-            {
-                if (selectedTable != null)
+                if (selectedPackage == null) //No selected product
                 {
-                    try
+                    MessageBox.Show("There is no package selected", "Delete Error");
+                    return;
+                }
+                // get confirmation before delete
+                DialogResult answer = MessageBox.Show($"Are you sure to delete {selectedPackage.PkgName}?",
+                        "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)              //Confirmed deletion
+                {
+                    if (selectedTable != null)
                     {
-                        PackageManager.RemovePackage(selectedPackage);      //Delete the product from the database     
-                        DisplayPackages();                                  //Display the updated products table.
+                        try
+                        {
+                            PackageManager.RemovePackage(selectedPackage);      //Delete the product from the database     
+                            DisplayPackages();                                  //Display the updated products table.
 
                         }
                         catch (Exception ex)
                         {
 
-                        MessageBox.Show($"Error when deleting customer: {ex.Message}", ex.GetType().ToString()); //Display error if unable to delete the product.
+                            MessageBox.Show($"Error when deleting customer: {ex.Message}", ex.GetType().ToString()); //Display error if unable to delete the product.
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Deletion cancelled");
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Deletion cancelled");
-                }
+
             }
-        
-        }
-            
-        //Section of code with Add, Modify and Delete Product Functions.
-        private void AddProduct()
+
+            //Section of code with Add, Modify and Delete Product Functions.
+            private void AddProduct()
             {
                 frmAddModifyProducts addProduct = new frmAddModifyProducts();
                 addProduct.isAdd = true;
@@ -441,7 +442,7 @@ namespace Workshop_3
                 }
 
             }
-        private void ModifyProduct(Product product)
+            private void ModifyProduct(Product product)
             {
                 frmAddModifyProducts modifyProduct = new frmAddModifyProducts();
                 modifyProduct.isAdd = false;
@@ -496,8 +497,8 @@ namespace Workshop_3
 
             }
 
-        //Section of Code with ADD,Modify and Delete Supplier Functions.
-        private void AddSupplier()
+            //Section of Code with ADD,Modify and Delete Supplier Functions.
+            private void AddSupplier()
             {
                 frmAddModifySuppliers addSupplier = new frmAddModifySuppliers();
                 addSupplier.isAdd = true;
@@ -544,7 +545,7 @@ namespace Workshop_3
                 }
 
             }
-        private void DeleteSupplier(Supplier selectedSupplier)
+            private void DeleteSupplier(Supplier selectedSupplier)
             {
                 if (selectedSupplier == null) //No selected Supplier
                 {
@@ -653,11 +654,11 @@ namespace Workshop_3
             }
 
 
-        private void btnExit_Click(object sender, EventArgs e)
+            private void btnExit_Click(object sender, EventArgs e)
             {
                 Application.Exit();
             }
-        private void btnAdd_Click(object sender, EventArgs e)
+            private void btnAdd_Click(object sender, EventArgs e)
             {
                 if (selectedTable != null)
                 {
@@ -689,59 +690,59 @@ namespace Workshop_3
                 }
             }
 
-        private void AddPackagesProductsSupplier()
-        {
-            fromAddModifyPckgPrdSupplier addPckgPrdSupplierForm = new fromAddModifyPckgPrdSupplier();
-            addPckgPrdSupplierForm.isAdd = true;
-            DialogResult result = addPckgPrdSupplierForm.ShowDialog();
-
-            if (result == DialogResult.OK)
+            private void AddPackagesProductsSupplier()
             {
-                this.packagesproductsupplierToAdd = addPckgPrdSupplierForm.PckgPrdSupplier;
-                try
-                {
-                    PackagesProductsSupplierManager.Add(packagesproductsupplierToAdd);
-                    DisplayPackagesProductsSupplier();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error when adding Package Product Supplier: {ex.Message}",
-                                    ex.GetType().ToString());
-                }
-            }
-        }
-        private void DeletePackagesProductsSupplier(PackagesProductsSupplier selectedPackagesProductsSupplier)
-        {
-            if (selectedPackagesProductsSupplier == null) //No selected Package product supplier
-            {
-                MessageBox.Show("There is no item selected", "Delete Error");
-                return;
-            }
-            // get confirmation before delete
-            DialogResult answer = MessageBox.Show($"Are you sure to delete {selectedPackagesProductsSupplier}?",
-                    "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                fromAddModifyPckgPrdSupplier addPckgPrdSupplierForm = new fromAddModifyPckgPrdSupplier();
+                addPckgPrdSupplierForm.isAdd = true;
+                DialogResult result = addPckgPrdSupplierForm.ShowDialog();
 
-            if (answer == DialogResult.Yes)              //Confirmed deletion
-            {
-                try
+                if (result == DialogResult.OK)
                 {
-                    PackagesProductsSupplierManager.RemoveSupplier(selectedPackagesProductsSupplier);       //Delete the record from the database     
-                    DisplayPackagesProductsSupplier();                                                      //Display the updated Supplier table.
-
-                }
-                catch (Exception ex)
-                {
-
-                    MessageBox.Show($"Error when deleting Package Product Supplier: {ex.Message}", ex.GetType().ToString()); //Display error if unable to delete the product.
+                    this.packagesproductsupplierToAdd = addPckgPrdSupplierForm.PckgPrdSupplier;
+                    try
+                    {
+                        PackagesProductsSupplierManager.Add(packagesproductsupplierToAdd);
+                        DisplayPackagesProductsSupplier();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error when adding Package Product Supplier: {ex.Message}",
+                                        ex.GetType().ToString());
+                    }
                 }
             }
-            else
+            private void DeletePackagesProductsSupplier(PackagesProductsSupplier selectedPackagesProductsSupplier)
             {
-                MessageBox.Show("Deletion cancelled");
-            }
-        }
+                if (selectedPackagesProductsSupplier == null) //No selected Package product supplier
+                {
+                    MessageBox.Show("There is no item selected", "Delete Error");
+                    return;
+                }
+                // get confirmation before delete
+                DialogResult answer = MessageBox.Show($"Are you sure to delete {selectedPackagesProductsSupplier}?",
+                        "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-        private void label1_Click(object sender, EventArgs e)
+                if (answer == DialogResult.Yes)              //Confirmed deletion
+                {
+                    try
+                    {
+                        PackagesProductsSupplierManager.RemoveSupplier(selectedPackagesProductsSupplier);       //Delete the record from the database     
+                        DisplayPackagesProductsSupplier();                                                      //Display the updated Supplier table.
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show($"Error when deleting Package Product Supplier: {ex.Message}", ex.GetType().ToString()); //Display error if unable to delete the product.
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Deletion cancelled");
+                }
+            }
+
+            private void label1_Click(object sender, EventArgs e)
             {
 
             }

@@ -24,7 +24,7 @@ namespace Workshop_3
         {
             //Populate Product Supplier ID and Package Id in the comboboxes.
             List<PackagesDTO> packages = PackageManager.GetPackages();
-            List<ProductsSupplierDTO> productsSuppliers = ProductsSupplierManager.GetProductsSupplier();
+            List<ProductsSupplierDTO> productsSuppliers = ProductsSupplierManager.GetProductsSuppliers();
             
             cbPrdSuppID.DataSource = productsSuppliers;
             cbPrdSuppID.DisplayMember = "ProductSupplierId";

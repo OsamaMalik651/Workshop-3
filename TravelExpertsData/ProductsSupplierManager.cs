@@ -31,6 +31,11 @@ namespace TravelExpertsData
             }
         }
 
+        public static List<ProductsSupplierDTO> GetProductsSupplier()
+        {
+            throw new NotImplementedException();
+        }
+
         public static ProductsSupplier GetProductSupplier(int productsSupplierID)
         {
             throw new NotImplementedException();
