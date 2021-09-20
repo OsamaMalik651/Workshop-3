@@ -49,7 +49,7 @@ namespace Workshop_3
             /*DisplayPackages();*/
         }
 
-        //Section of Code to set up data grid view and associated funtion to prepare Datagrid for Data source change.
+        //Section of Code to set up data grid view and associated function to prepare Data grid for Data source change.
         private void dgViewSetup()
         {
             //DataGridView styling
@@ -103,6 +103,11 @@ namespace Workshop_3
             deleteCoulumns();
             DisplayProductsSupplier();
         }
+        private void btnPackProdSup_Click(object sender, EventArgs e)
+        {
+            deleteCoulumns();
+            DisplayPackagesProductsSupplier();
+        }
 
 
         //Section of code for the Display functions for each table
@@ -112,7 +117,7 @@ namespace Workshop_3
             //Get Packages
             packages = PackageManager.GetPackages();
 
-            //Set DataGridView Datasourse to packages.
+            //Set DataGridView Data source to packages.
             dgView.DataSource = packages.ToList();
 
             dgViewSetup();
@@ -157,7 +162,7 @@ namespace Workshop_3
             deleteCoulumns();
             //Get Products
             products = ProductManager.GetProducts();
-            //Set DataGridView Datasourse to packages.
+            //Set DataGridView Data source to packages.
             dgView.DataSource = products.ToList();
 
             dgViewSetup();
@@ -181,7 +186,7 @@ namespace Workshop_3
             deleteCoulumns();
             //Get Suppliers
             suppliers = SupplierManager.GetSuppliers();
-            //Set DataGridView Datasourse to Suppliers.
+            //Set DataGridView Data source to Suppliers.
             dgView.DataSource = suppliers.ToList();
 
             dgViewSetup();
@@ -203,8 +208,8 @@ namespace Workshop_3
         private void DisplayProductsSupplier()
         {
             //Get Product Suppliers
-            productssuppliers = ProductsSupplierManager.GetProductsSupplier();
-            //Set DataGridView Datasourse to products supplier.
+            productssuppliers = ProductsSupplierManager.GetProductsSuppliers();
+            //Set DataGridView Data source to products supplier.
             dgView.DataSource = productssuppliers.ToList();
 
             dgViewSetup();
@@ -223,24 +228,14 @@ namespace Workshop_3
             ModifyIndex = 3;
             DeleteIndex = 4;
 
-            selectedTable = "Products Supplier";
+            selectedTable = "ProductsSupplier";
 
-        }
-
-
-
-        //Function for the selection of appropriate selection of tables to modify and delete 
-
-        private void btnPackProdSup_Click(object sender, EventArgs e)
-        {
-            deleteCoulumns();
-            DisplayPackagesProductsSupplier();
         }
         private void DisplayPackagesProductsSupplier()
         {
             //Get Packages Product Suppliers (Sola Oyatunji)
             packagesproductssuppliers = PackagesProductsSupplierManager.GetPackagesProductsSupplier();
-            //Set DataGridView Datasourse to Package products supplier.
+            //Set DataGridView Data source to Package products supplier.
             dgView.DataSource = packagesproductssuppliers.ToList();
 
             dgViewSetup();
@@ -257,6 +252,7 @@ namespace Workshop_3
             DeleteIndex = 3;
         }
 
+        //Function for the selection of appropriate selection of tables to modify and delete 
         private void dgView_CellClick(object sender,
         DataGridViewCellEventArgs e)
         {
@@ -319,127 +315,110 @@ namespace Workshop_3
 
             }
 
-            //else if (selectedTable == "Product Suppliers")
-            //{
-            //    if (e.ColumnIndex == ModifyIndex || e.ColumnIndex == DeleteIndex)
-            //    {
-            //        int productsSupplierID = Convert.ToInt32(
-            //        dgView.Rows[e.RowIndex].Cells[0].Value.ToString().Trim());
-            //        selectedProductsSupplier = ProductsSupplierManager.GetProductSupplier(productsSupplierID);
-            //    }
-            //    if (e.ColumnIndex == ModifyIndex)
-            //    {
-            //        label1.Text = $"Modify {selectedProductsSupplier.ProdSupName}";
-            //        ModifyProductsSupplier(selectedProductsSupplier.ProductsSupplierId);
-            //    }
-            //    else if (e.ColumnIndex == DeleteIndex)
-            //        label1.Text = $"Delete {selectedProductsSupplier.ProdSupName}";
-            //}
-            //else if (selectedTable == "Package Products Supplier")
-            //{
-            //    if (e.ColumnIndex == ModifyIndex || e.ColumnIndex == DeleteIndex)
-            //    {
-            //        int productID = Convert.ToInt32(
-            //        dgView.Rows[e.RowIndex].Cells[0].Value.ToString().Trim());
-            //        selectedPackagesProductsSupplier = PackagesProductsSupplierManager.GetPackagesProductsSupplier(PackagesProductsSupplierID);
-            //    }
-            //    if (e.ColumnIndex == ModifyIndex)
-            //    {
-            //        label1.Text = $"Modify {selectedPackagesProductsSupplier.ProdName}";
-            //        ModifyPackagesProductsSupplier(selectedPackagesProductsSupplier.PackagesProductsSupplierId);
-            //    }
-            //    else if (e.ColumnIndex == DeleteIndex)
-            //        label1.Text = $"Delete {selectedPackagesProductsSupplier.ProdName}";
-            //}
-        }
-
-
-        //Section of code with Add,Modify and Delete package functions.
-        private void AddPackage()
-        {
-            frmAddModifyPackage addForm = new frmAddModifyPackage
+            else if (selectedTable == "Product Suppliers")
             {
-                isAdd = true
-            };
-            DialogResult result = addForm.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                this.packageToAdd = addForm.package;
-                try
+                if (e.ColumnIndex == ModifyIndex || e.ColumnIndex == DeleteIndex)
                 {
-                    PackageManager.AddPackage(packageToAdd);
-                    DisplayPackages();
+                    int productsSupplierID = Convert.ToInt32(dgView.Rows[e.RowIndex].Cells[0].Value.ToString().Trim());
+                    selectedProductsSupplier = ProductsSupplierManager.GetProductSupplier(productsSupplierID);
                 }
-                catch (Exception ex)
+                if (e.ColumnIndex == ModifyIndex)
                 {
-
-                    MessageBox.Show($"Error when adding package: {ex.Message}",
-                                    ex.GetType().ToString());
+                    ModifyProductsSuppliers(selectedProductsSupplier);
                 }
-
-            }
-
-        }
-        private void ModifyPackage(Package package)
-        {
-            frmAddModifyPackage modifyPackage = new frmAddModifyPackage();
-            modifyPackage.isAdd = false;
-            modifyPackage.package = this.selectedPackage;
-            DialogResult result = modifyPackage.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                this.packageToAdd = modifyPackage.package;
-                try
+                else if (e.ColumnIndex == DeleteIndex)
                 {
-                    PackageManager.ModifyPackage(packageToAdd);
-                    DisplayPackages();
-                }
-                catch (Exception ex)
-                {
-
-                    MessageBox.Show($"Error when modifying package: {ex.Message}",
-                                    ex.GetType().ToString());
+                    DeleteProductsSuppliers(selectedProductsSupplier);
                 }
 
             }
         }
-
-        private void DeletePackage(Package package)
-
-        {
-            if (selectedPackage == null) //No selected product
+            //Section of code with Add,Modify and Delete package functions.
+            private void AddPackage()
             {
-                MessageBox.Show("There is no package selected", "Delete Error");
-                return;
-            }
-            // get confirmation before delete
-            DialogResult answer = MessageBox.Show($"Are you sure to delete {selectedPackage}?",
-                    "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (answer == DialogResult.Yes)              //Confirmed deletion
-            {
-                if (selectedTable != null)
+                frmAddModifyPackage addForm = new frmAddModifyPackage
                 {
+                    isAdd = true
+                };
+                DialogResult result = addForm.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    this.packageToAdd = addForm.package;
                     try
                     {
-                        PackageManager.RemovePackage(selectedPackage);      //Delete the product from the database     
-                        DisplayPackages();                                  //Display the updated products table.
-
+                        PackageManager.AddPackage(packageToAdd);
+                        DisplayPackages();
                     }
                     catch (Exception ex)
                     {
 
-                        MessageBox.Show($"Error when deleting customer: {ex.Message}", ex.GetType().ToString()); //Display error if unable to delete the product.
+                        MessageBox.Show($"Error when adding package: {ex.Message}",
+                                        ex.GetType().ToString());
                     }
+
                 }
-                else
+
+            }
+            private void ModifyPackage(Package package)
+            {
+                frmAddModifyPackage modifyPackage = new frmAddModifyPackage();
+                modifyPackage.isAdd = false;
+                modifyPackage.package = this.selectedPackage;
+                DialogResult result = modifyPackage.ShowDialog();
+                if (result == DialogResult.OK)
                 {
-                    MessageBox.Show("Deletion cancelled");
+                    this.packageToAdd = modifyPackage.package;
+                    try
+                    {
+                        PackageManager.ModifyPackage(packageToAdd);
+                        DisplayPackages();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show($"Error when modifying package: {ex.Message}",
+                                        ex.GetType().ToString());
+                    }
+
                 }
             }
-        
-        }
+            private void DeletePackage(Package package)
+
+            {
+                if (selectedPackage == null) //No selected product
+                {
+                    MessageBox.Show("There is no package selected", "Delete Error");
+                    return;
+                }
+                // get confirmation before delete
+                DialogResult answer = MessageBox.Show($"Are you sure to delete {selectedPackage}?",
+                        "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)              //Confirmed deletion
+                {
+                    if (selectedTable != null)
+                    {
+                        try
+                        {
+                            PackageManager.RemovePackage(selectedPackage);      //Delete the product from the database     
+                            DisplayPackages();                                  //Display the updated products table.
+
+                        }
+                        catch (Exception ex)
+                        {
+
+                            MessageBox.Show($"Error when deleting customer: {ex.Message}", ex.GetType().ToString()); //Display error if unable to delete the product.
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Deletion canceled");
+                    }
+                }
+
+            }
+
             //Section of code with Add, Modify and Delete Product Functions.
-        private void AddProduct()
+            private void AddProduct()
             {
                 frmAddModifyProducts addProduct = new frmAddModifyProducts();
                 addProduct.isAdd = true;
@@ -462,8 +441,7 @@ namespace Workshop_3
                 }
 
             }
-
-        private void ModifyProduct(Product product)
+            private void ModifyProduct(Product product)
             {
                 frmAddModifyProducts modifyProduct = new frmAddModifyProducts();
                 modifyProduct.isAdd = false;
@@ -486,7 +464,7 @@ namespace Workshop_3
 
                 }
             }
-        private void DeleteProduct(Product product)
+            private void DeleteProduct(Product product)
             {
                 if (selectedProduct == null) //No selected product
                 {
@@ -513,13 +491,13 @@ namespace Workshop_3
                 }
                 else
                 {
-                    MessageBox.Show("Deletion cancelled");
+                    MessageBox.Show("Deletion canceled");
                 }
 
             }
 
             //Section of Code with ADD,Modify and Delete Supplier Functions.
-        private void AddSupplier()
+            private void AddSupplier()
             {
                 frmAddModifySuppliers addSupplier = new frmAddModifySuppliers();
                 addSupplier.isAdd = true;
@@ -543,7 +521,7 @@ namespace Workshop_3
                 }
 
             }
-        private void ModifySupplier(Supplier selectedSupplier)
+            private void ModifySupplier(Supplier selectedSupplier)
             {
                 frmAddModifySuppliers modifySupplier = new frmAddModifySuppliers();
                 modifySupplier.isAdd = false;
@@ -566,8 +544,7 @@ namespace Workshop_3
                 }
 
             }
-
-        private void DeleteSupplier(Supplier selectedSupplier)
+            private void DeleteSupplier(Supplier selectedSupplier)
             {
                 if (selectedSupplier == null) //No selected Supplier
                 {
@@ -594,16 +571,94 @@ namespace Workshop_3
                 }
                 else
                 {
-                    MessageBox.Show("Deletion cancelled");
+                    MessageBox.Show("Deletion canceled");
                 }
             }
 
-        private void btnExit_Click(object sender, EventArgs e)
+            //Section of Code with ADD,Modify and Delete Products Supplier Functions.
+            private void AddProducstsSupplier()
+            {
+                frmAddModifyProductsSupplier addProductsSupplier = new frmAddModifyProductsSupplier();
+                addProductsSupplier.isAdd = true;
+                DialogResult result = addProductsSupplier.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    this.productssupplierToAdd = addProductsSupplier.productssupplier;
+                    try
+                    {
+                        ProductsSupplierManager.AddProductsSupplier(productssupplierToAdd);
+                        DisplayProductsSupplier();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show($"Error when adding product: {ex.Message}",
+                                        ex.GetType().ToString());
+                    }
+
+                }
+            }
+            private void ModifyProductsSuppliers(object productsSuppliersId)
+            {
+                frmAddModifyProductsSupplier modifyProductsSupplier = new frmAddModifyProductsSupplier();
+                modifyProductsSupplier.isAdd = false;
+                modifyProductsSupplier.productssupplier = this.selectedProductsSupplier;
+                DialogResult result = modifyProductsSupplier.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    this.productssupplierToAdd = modifyProductsSupplier.productssupplier;
+                    try
+                    {
+                        ProductsSupplierManager.ModifyProductsSupplier(productssupplierToAdd);
+                        DisplayProductsSupplier();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show($"Error when modifying package: {ex.Message}",
+                                        ex.GetType().ToString());
+                    }
+                }
+            }
+
+            private void DeleteProductsSuppliers(ProductsSupplier selectedProductsSupplier)
+            {
+                if (selectedProductsSupplier == null) //No selected Products Supplier
+                {
+                    MessageBox.Show("There is no Products Supplier selected", "Delete Error");
+                    return;
+                }
+                // get confirmation before delete
+                DialogResult answer = MessageBox.Show($"Are you sure to delete {selectedProductsSupplier}?",
+                        "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (answer == DialogResult.Yes)              //Confirmed deletion
+                {
+                    try
+                    {
+                        ProductsSupplierManager.RemoveProductsSupplier(selectedProductsSupplier);      //Delete the Products Supplier from the database     
+                        DisplayProductsSupplier();                                  //Display the updated Products Supplier table.
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show($"Error when deleting Products Supplier: {ex.Message}", ex.GetType().ToString()); //Display error if unable to delete the products supplier.
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Deletion canceled");
+                }
+            }
+
+
+            private void btnExit_Click(object sender, EventArgs e)
             {
                 Application.Exit();
             }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+            private void btnAdd_Click(object sender, EventArgs e)
             {
                 if (selectedTable != null)
                 {
@@ -620,6 +675,10 @@ namespace Workshop_3
                         case ("Supplier"):
                             AddSupplier();
                             break;
+                        //
+                        case ("ProductsSupplier"):
+                            AddProducstsSupplier();
+                            break;
                     }
 
                 }
@@ -628,8 +687,6 @@ namespace Workshop_3
                     MessageBox.Show("Please select a table to add the record!");
                 }
             }
-
-
 
             private void label1_Click(object sender, EventArgs e)
             {
