@@ -30,6 +30,33 @@ namespace TravelExpertsData
             }
         }
 
+        public static void Add(PackagesProductsSupplier packagesproductsupplierToAdd)
+        {
+            using(TravelExperContext db = new TravelExperContext())
+            {
+                db.PackagesProductsSuppliers.Add(packagesproductsupplierToAdd);
+                db.SaveChanges();
+            }
+            
+        }
 
+        public static PackagesProductsSupplier GetPackagesProductsSupplier(int pckgProdSupplierID, int pckProdSupplierPackageID)
+        {
+            PackagesProductsSupplier packagesProductsSupplier = null;
+            using(TravelExperContext db = new TravelExperContext())
+            {
+                packagesProductsSupplier = db.PackagesProductsSuppliers.Find(pckgProdSupplierID, pckProdSupplierPackageID);
+            }
+            return packagesProductsSupplier;
+        }
+
+        public static void RemoveSupplier(PackagesProductsSupplier selectedPackagesProductsSupplier)
+        {
+            using (TravelExperContext db = new TravelExperContext())
+            {
+                db.PackagesProductsSuppliers.Remove(selectedPackagesProductsSupplier);
+                db.SaveChanges();
+            }
+        }
     }
 }
