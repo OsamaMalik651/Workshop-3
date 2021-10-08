@@ -51,12 +51,7 @@ namespace Workshop_3
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (isAdd)
-            {
-                product = new Product();
-            }
-            product.ProdName = txtProductName.Text;
-            this.DialogResult = DialogResult.OK;
+
         }
     }
 }

@@ -19,9 +19,9 @@ namespace Workshop_3
         public bool prodsupID, prodsupName;
         public ProductsSupplier productssupplier = null;
         private List<ProductsSupplierDTO> productssuppliers;
-        private bool productssupplierId;
-        private bool productId;
-        private bool supplierId;
+        private List<ProductsDTO> products;
+        private List<SupplierDTO> suppliers;
+       
 
         public frmAddModifyProductsSupplier()
         {
@@ -29,11 +29,28 @@ namespace Workshop_3
         }
 
         private void frmAddModifyProductsSupplier_Load(object sender, EventArgs e)
-        {
+        { 
             productssuppliers = ProductsSupplierManager.GetProductsSuppliers();
+            products = ProductManager.GetProducts();
+            suppliers = SupplierManager.GetSuppliers();
+
+            cbProduct.DataSource = products;
+            cbProduct.DisplayMember = "ProdName";
+            cbProduct.ValueMember = "ProductId";
+            cbProduct.DropDownWidth = 200;
+
+            cbSupplier.DataSource = suppliers;
+            cbSupplier.DisplayMember = "SupName";
+            cbSupplier.ValueMember = "SupplierId";
+            cbSupplier.DropDownWidth = 400;
+
+            txtProductsSupplierId.ReadOnly = true;
+            txtProductsSupplierId.Text = "Auto-Generated";
+
             if (isAdd) //Add
             {
                 this.Text = "Add Products Supplier";
+
 
             }
             else //Modify
@@ -41,7 +58,6 @@ namespace Workshop_3
                 this.Text = "Modify Products Supplier";
                 if (productssupplier == null)
                 {
-
                     MessageBox.Show("There is no current products supplier selected", "Modify Error");
                     this.DialogResult = DialogResult.Cancel;
                     //this.Close(); // close this form
@@ -49,55 +65,25 @@ namespace Workshop_3
                 //Display Current Products Supplier
                 txtProductsSupplierId.ReadOnly = true;
                 txtProductsSupplierId.Text = productssupplier.SupplierId.ToString();
-                //txtProductId.Text = productssupplier.ProductId;
-                //txtSupplierId.Text = productssupplier.SupName;
+                cbProduct.SelectedValue = productssupplier.ProductId;
+                cbSupplier.SelectedValue = productssupplier.SupplierId;
+
             }
         }
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            label4.Text = "";
-            label5.Text = "";
-            label6.Text = "";
-            prodsupID = prodsupName = false;
 
             if (isAdd)
-            {  
-                //Check whether the entered products supplier id is already present in the database
-                bool IDpresent = productssuppliers.Exists(e => e.ProductSupplierId == Convert.ToInt32(txtProductsSupplierId.Text));
-                if (IDpresent)
-                {
-                    label4.Text = "Products Supplier Id already present";
-                    txtProductsSupplierId.Focus();
-                    txtProductsSupplierId.SelectAll();
-                }
-                else
-                    prodsupID = true;
-                
-                //if (IDPresent)
-                //{
-                //    label5.Text = "Product Id already present";
-                //    label5.ForeColor = Color.Red;
-                //}
-                //else
-                //{ productId = true; }
-
-                //productId = new ProductId();
-
-
-                if (productId)
-                {
-                    productssupplier.ProductId = Convert.ToInt32(txtProductId.Text);
-                    productssupplier.ProductId = Convert.ToInt32(txtProductId.Text);
-                    this.DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    productssupplier.ProductId = Convert.ToInt32(txtProductId.Text);
-                    productssupplier.ProductId = Convert.ToInt32(txtProductId.Text);
-                    this.DialogResult = DialogResult.OK;
-                }
+            {
+                productssupplier = new ProductsSupplier();
             }
+
+            /*productssupplier.ProductSupplierId = Convert.ToInt32(txtProductsSupplierId.Text);*/
+            productssupplier.ProductId = Convert.ToInt32(cbProduct.SelectedValue.ToString());
+            productssupplier.SupplierId = Convert.ToInt32(cbSupplier.SelectedValue.ToString());
+
+            this.DialogResult = DialogResult.OK;
         }
     }
 }

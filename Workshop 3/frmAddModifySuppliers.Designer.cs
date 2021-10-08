@@ -41,22 +41,24 @@ namespace Workshop_3
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(13, 54);
+            this.label1.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(13, 44);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(155, 39);
+            this.label1.Size = new System.Drawing.Size(155, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "Supplier ID:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(13, 120);
+            this.label2.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(13, 99);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(155, 39);
+            this.label2.Size = new System.Drawing.Size(155, 32);
             this.label2.TabIndex = 0;
             this.label2.Text = "Supplier Name:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -64,8 +66,8 @@ namespace Workshop_3
             // txtSupplierID
             // 
             this.txtSupplierID.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtSupplierID.Location = new System.Drawing.Point(193, 50);
-            this.txtSupplierID.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSupplierID.Location = new System.Drawing.Point(193, 41);
+            this.txtSupplierID.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtSupplierID.Name = "txtSupplierID";
             this.txtSupplierID.Size = new System.Drawing.Size(137, 34);
             this.txtSupplierID.TabIndex = 0;
@@ -73,19 +75,21 @@ namespace Workshop_3
             // txtSupplierName
             // 
             this.txtSupplierName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtSupplierName.Location = new System.Drawing.Point(193, 116);
-            this.txtSupplierName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSupplierName.Location = new System.Drawing.Point(193, 95);
+            this.txtSupplierName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtSupplierName.Name = "txtSupplierName";
             this.txtSupplierName.Size = new System.Drawing.Size(363, 34);
             this.txtSupplierName.TabIndex = 1;
             // 
             // btnAccept
             // 
-            this.btnAccept.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnAccept.Location = new System.Drawing.Point(119, 186);
-            this.btnAccept.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAccept.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAccept.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAccept.ForeColor = System.Drawing.Color.White;
+            this.btnAccept.Location = new System.Drawing.Point(119, 153);
+            this.btnAccept.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(131, 59);
+            this.btnAccept.Size = new System.Drawing.Size(131, 48);
             this.btnAccept.TabIndex = 2;
             this.btnAccept.Text = "&Accept";
             this.btnAccept.UseVisualStyleBackColor = true;
@@ -93,12 +97,14 @@ namespace Workshop_3
             // 
             // btnCancel
             // 
-            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnCancel.Location = new System.Drawing.Point(312, 186);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCancel.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
+            this.btnCancel.Location = new System.Drawing.Point(312, 153);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(131, 59);
-            this.btnCancel.TabIndex = 2;
+            this.btnCancel.Size = new System.Drawing.Size(131, 48);
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -106,7 +112,7 @@ namespace Workshop_3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(337, 60);
+            this.label3.Location = new System.Drawing.Point(337, 49);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(0, 20);
             this.label3.TabIndex = 3;
@@ -115,17 +121,18 @@ namespace Workshop_3
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(193, 154);
+            this.label4.Location = new System.Drawing.Point(193, 127);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(0, 20);
             this.label4.TabIndex = 3;
             // 
             // frmAddModifySuppliers
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(64)))), ((int)(((byte)(80)))));
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(577, 285);
+            this.ClientSize = new System.Drawing.Size(582, 233);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnCancel);
@@ -134,8 +141,9 @@ namespace Workshop_3
             this.Controls.Add(this.txtSupplierID);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MinimumSize = new System.Drawing.Size(600, 280);
             this.Name = "frmAddModifySuppliers";
             this.Text = "frmAddModifySuppliers";
             this.Load += new System.EventHandler(this.frmAddModifySuppliers_Load);

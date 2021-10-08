@@ -22,5 +22,9 @@ namespace TravelExpertsData
        
         public decimal? PkgAgencyCommission { get; set; }
 
+        //newly added
+       /* public virtual ICollection<PackagesProductsSupplier> PackagesProductsSuppliers { get; set; }*/
+
+
     }
 }

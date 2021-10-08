@@ -12,6 +12,8 @@ namespace TravelExpertsData
     public class PackagesProductsSupplierDTO
     {
         public int PackageId { get; set; }
+
+       /* public string PackageName { get; set; }*/
         
         public int ProductSupplierId { get; set; }
     }

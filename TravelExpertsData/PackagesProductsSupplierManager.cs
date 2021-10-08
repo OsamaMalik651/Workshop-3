@@ -22,41 +22,52 @@ namespace TravelExpertsData
             using (TravelExperContext db = new TravelExperContext())
             {
                 packagesproductssuppliers = db.PackagesProductsSuppliers.Select(e => new PackagesProductsSupplierDTO
-                {
+                {  
                     ProductSupplierId = e.ProductSupplierId,
                     PackageId = e.PackageId,
+                    
                 }).ToList();
                 return packagesproductssuppliers;
             }
         }
-
-        public static void Add(PackagesProductsSupplier packagesproductsupplierToAdd)
-        {
-            using(TravelExperContext db = new TravelExperContext())
-            {
-                db.PackagesProductsSuppliers.Add(packagesproductsupplierToAdd);
-                db.SaveChanges();
-            }
-            
-        }
-
-        public static PackagesProductsSupplier GetPackagesProductsSupplier(int pckgProdSupplierID, int pckProdSupplierPackageID)
+        public static PackagesProductsSupplier GetPackagesProductsSupplier( int pckProdSupplierPackageID, int pckgProdSupplierID)
         {
             PackagesProductsSupplier packagesProductsSupplier = null;
-            using(TravelExperContext db = new TravelExperContext())
+            using (TravelExperContext db = new TravelExperContext())
             {
-                packagesProductsSupplier = db.PackagesProductsSuppliers.Find(pckgProdSupplierID, pckProdSupplierPackageID);
+                packagesProductsSupplier = db.PackagesProductsSuppliers.Find( pckProdSupplierPackageID, pckgProdSupplierID);
             }
             return packagesProductsSupplier;
         }
 
-        public static void RemoveSupplier(PackagesProductsSupplier selectedPackagesProductsSupplier)
+
+        public static void Add(List<PackagesProductsSupplier> PackageProductSuppliersList)
+        {
+            using(TravelExperContext db = new TravelExperContext())
+            {
+                db.PackagesProductsSuppliers.AddRange(PackageProductSuppliersList);
+                db.SaveChanges();            
+            }
+            
+        }
+
+       
+        public static void RemoveSupplier(PackagesProductsSupplier selectedPackagesProductsSupplier) //This function will be removed afterwards
         {
             using (TravelExperContext db = new TravelExperContext())
             {
                 db.PackagesProductsSuppliers.Remove(selectedPackagesProductsSupplier);
                 db.SaveChanges();
             }
+        }
+
+        public static void RemoveAllEntries(int packageID)
+        {
+            TravelExperContext db = new TravelExperContext();
+            List<PackagesProductsSupplier> pkgprdsupToDelete = db.PackagesProductsSuppliers.Where(p => p.PackageId == packageID).ToList();
+            db.PackagesProductsSuppliers.RemoveRange(pkgprdsupToDelete);
+            db.SaveChanges();
+
         }
     }
 }

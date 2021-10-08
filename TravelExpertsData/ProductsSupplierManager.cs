@@ -31,19 +31,25 @@ namespace TravelExpertsData
             }
         }
 
-        public static List<ProductsSupplierDTO> GetProductsSupplier()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public static ProductsSupplier GetProductSupplier(int productsSupplierID)
         {
-            throw new NotImplementedException();
+            ProductsSupplier prodsupplier = null;
+            using(TravelExperContext db = new TravelExperContext())
+            {
+                prodsupplier = db.ProductsSuppliers.Find(productsSupplierID);
+                return prodsupplier;
+            }
         }
 
         public static void AddProductsSupplier(ProductsSupplier productssupplierToAdd)
         {
-            throw new NotImplementedException();
+            using(TravelExperContext db = new TravelExperContext())
+            {
+                db.ProductsSuppliers.Add(productssupplierToAdd);
+                db.SaveChanges();
+            }
         }
 
         public static void ModifyProductsSupplier(ProductsSupplier productssupplierToAdd)
@@ -53,7 +59,22 @@ namespace TravelExpertsData
 
         public static void RemoveProductsSupplier(ProductsSupplier selectedProductsSupplier)
         {
-            throw new NotImplementedException();
+            using (TravelExperContext db= new TravelExperContext())
+            {
+                db.ProductsSuppliers.Remove(selectedProductsSupplier);
+                db.SaveChanges();
+            }
         }
+        /*public static ProductsSupplier GetProductSupplierDetails(int PackagesProductSupplierID)
+        {
+            ProductsSupplier prodSupplier = null;
+            using (TravelExperContext db = new TravelExperContext())
+            {
+                prodSupplier = db.ProductsSuppliers.)
+                    
+            }
+        }*/
     }
+
+        
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +29,9 @@ namespace TravelExpertsData
                     PkgEndDate = p.PkgEndDate,
                     PkgDesc = p.PkgDesc,
                     PkgBasePrice = p.PkgBasePrice,
-                    PkgAgencyCommission = p.PkgAgencyCommission
+                    PkgAgencyCommission = p.PkgAgencyCommission,
+                   /* PackagesProductsSuppliers = p.PackagesProductsSuppliers*/
+                    
                 }).ToList();
             }
             return packages;
@@ -52,27 +55,50 @@ namespace TravelExpertsData
         /// Method to Add a package to the database.
         /// </summary>
         /// <param name="newPackage">new package to be added to database.</param>
-        public static void AddPackage(Package newPackage)
-        {
-            using(TravelExperContext db = new TravelExperContext())
+        public static void AddPackage(Package newPackage, List<int> productSupplierId)
+        {    
+            int packageID = 0;
+            List<PackagesProductsSupplier> PackageProductSuppliersList = new List<PackagesProductsSupplier>();
+            
+            using (TravelExperContext db = new TravelExperContext())
             {
                 db.Packages.Add(newPackage);
                 db.SaveChanges();
+                packageID = newPackage.PackageId;
+                foreach(int pps in productSupplierId)
+                {
+                    PackagesProductsSupplier packagesProductsSupplier = new PackagesProductsSupplier();
+                    packagesProductsSupplier.PackageId = packageID;
+                    packagesProductsSupplier.ProductSupplierId = pps;
+                    PackageProductSuppliersList.Add(packagesProductsSupplier);
+                }
+                PackagesProductsSupplierManager.Add(PackageProductSuppliersList);
             }
+
         }
 
         /// <summary>
         /// Method to modify the package details in the database.
         /// </summary>
         /// <param name="newPackage">Package with the new details</param>
-        public static void ModifyPackage(Package newPackage)
+        public static void ModifyPackage(Package newPackage, List<int> productSupplierId)
         {
             Package oldPackage;
-            using(TravelExperContext db = new TravelExperContext())
+            List<PackagesProductsSupplier> PackageProductSuppliersList = new List<PackagesProductsSupplier>();
+            using (TravelExperContext db = new TravelExperContext())
             {
                 oldPackage = db.Packages.Find(newPackage.PackageId);
                 CopyPackageData(oldPackage, newPackage);
                 db.SaveChanges();
+                foreach (int pps in productSupplierId)
+                {
+                    PackagesProductsSupplier packagesProductsSupplier = new PackagesProductsSupplier();
+                    packagesProductsSupplier.PackageId = newPackage.PackageId;
+                    packagesProductsSupplier.ProductSupplierId = pps;
+                    PackageProductSuppliersList.Add(packagesProductsSupplier);
+                }
+                PackagesProductsSupplierManager.RemoveAllEntries(newPackage.PackageId);
+                PackagesProductsSupplierManager.Add(PackageProductSuppliersList);
             }
         }
 
