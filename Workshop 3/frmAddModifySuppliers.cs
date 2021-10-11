@@ -14,9 +14,8 @@ namespace Workshop_3
 {
     public partial class frmAddModifySuppliers : Form
     {
-        //Variable to 
+        //Variable initializtion for the operation of forms.
         public bool isAdd; //true when add, and false when modify
-        public bool supID, supName;
         public Supplier supplier= null;
         private List<SupplierDTO> suppliers;
         public frmAddModifySuppliers()
@@ -26,73 +25,48 @@ namespace Workshop_3
 
         private void frmAddModifySuppliers_Load(object sender, EventArgs e)
         {
+            txtSupplierID.ReadOnly = true;
             suppliers = SupplierManager.GetSuppliers();
-            if (isAdd) //Add
-            {
-                this.Text = "Add Supplier";
-
-            }
-            else //Modify
-            {
-                this.Text = "Modify Product";
-                if (supplier == null)
+            
+                if (isAdd) //Add
                 {
-
-                    MessageBox.Show("There is no current supplier selected", "Modify Error");
-                    this.DialogResult = DialogResult.Cancel;
-                    //this.Close(); // close this form
+                    this.Text = "Add Supplier";
+                    txtSupplierID.Text = "auto-generated";
+                    txtSupplierName.Focus();
                 }
-                //Display Current Product
-                txtSupplierID.ReadOnly = true;
-                txtSupplierID.Text = supplier.SupplierId.ToString();
-                txtSupplierName.Text = supplier.SupName;
-            }
+                else //Modify
+                {
+                    this.Text = "Modify Supplier";
+                    if (supplier == null)
+                    {
+
+                        MessageBox.Show("There is no current supplier selected", "Modify Error");
+                        this.DialogResult = DialogResult.Cancel;
+                        //this.Close(); // close this form
+                    }
+                    //Display Current Product
+                    txtSupplierID.ReadOnly = true;
+                    txtSupplierID.Text = supplier.SupplierId.ToString();
+                    txtSupplierName.Text = supplier.SupName;
+                }
+            
         }
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            label3.Text="";
-            label4.Text = "";
-            supID = supName = false;
-
-            if (isAdd)
-            {  //Check whether the entered supplier id is already present in the database
-                bool IDpresent = suppliers.Exists(s => s.SupplierId == Convert.ToInt32(txtSupplierID.Text));
-                if (IDpresent)
-                {
-                    label3.Text = "Supplier Id already present";
-                    txtSupplierID.Focus();
-                    txtSupplierID.SelectAll();
-                }
-                else
-                    supID = true;
-                bool supPresent = suppliers.Exists(s => s.SupName == txtSupplierName.Text);
-                if (supPresent)
-                {
-                    label4.Text = "Supplier already present";
-                    label4.ForeColor = Color.Red;
-                }
-                else
-                { supName = true; }
-
-                supplier = new Supplier();
-                if(supID && supName) { 
-                supplier.SupplierId = Convert.ToInt32(txtSupplierID.Text);
-                supplier.SupName = txtSupplierName.Text;
-                this.DialogResult = DialogResult.OK;
-                }
-            }
-            else
+            if (Validator.IsPresent(txtSupplierName) && Validator.IsTextWithInLength(txtSupplierName, 250))
             {
-                supplier.SupplierId = Convert.ToInt32(txtSupplierID.Text);
+                if (isAdd)
+                {
+                    supplier = new Supplier();
+                }   
+                //find the max supplier id and add one to it as the database column in not an autoincrementing one.
+                suppliers = SupplierManager.GetSuppliers();
+                var supplierID = suppliers.Max(x => x.SupplierId) + 1;
+                supplier.SupplierId = supplierID;
                 supplier.SupName = txtSupplierName.Text;
                 this.DialogResult = DialogResult.OK;
             }
-
-
-
-
-
         }
     }
 }

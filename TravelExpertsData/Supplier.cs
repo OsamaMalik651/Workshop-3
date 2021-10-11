@@ -20,6 +20,7 @@ namespace TravelExpertsData
         [Key]
         public int SupplierId { get; set; }
         [StringLength(255)]
+        [Required]
         public string SupName { get; set; }
 
         [InverseProperty(nameof(ProductsSupplier.Supplier))]

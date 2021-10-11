@@ -14,7 +14,7 @@ namespace Workshop_3
     public partial class frmAddModifyProductsSupplier : Form
     {
        
-        //Variable to 
+        //Variable initialization for the form operations.
         public bool isAdd; //true when add, and false when modify
         public bool prodsupID, prodsupName;
         public ProductsSupplier productssupplier = null;
@@ -34,11 +34,12 @@ namespace Workshop_3
             products = ProductManager.GetProducts();
             suppliers = SupplierManager.GetSuppliers();
 
+            //Set the product combobox
             cbProduct.DataSource = products;
             cbProduct.DisplayMember = "ProdName";
             cbProduct.ValueMember = "ProductId";
             cbProduct.DropDownWidth = 200;
-
+            //SEt the Supplier Combobox
             cbSupplier.DataSource = suppliers;
             cbSupplier.DisplayMember = "SupName";
             cbSupplier.ValueMember = "SupplierId";

@@ -86,6 +86,8 @@ namespace Workshop_3
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 60);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel2.MaximumSize = new System.Drawing.Size(250, 760);
+            this.panel2.MinimumSize = new System.Drawing.Size(250, 760);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(250, 760);
             this.panel2.TabIndex = 1;
@@ -251,6 +253,8 @@ namespace Workshop_3
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximumSize = new System.Drawing.Size(1364, 867);
+            this.MinimumSize = new System.Drawing.Size(1364, 867);
             this.Name = "mainForm";
             this.Text = "Travel Experts";
             this.Load += new System.EventHandler(this.mainForm_Load);
@@ -280,11 +284,6 @@ namespace Workshop_3
         //private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label label3;
-        /*        private System.Windows.Forms.Label label6;
-private System.Windows.Forms.Label label5;
-private System.Windows.Forms.Label label4;
-private System.Windows.Forms.Label label3;
-private System.Windows.Forms.Label label2;
-private System.Windows.Forms.Label label7;*/
+  
     }
 }

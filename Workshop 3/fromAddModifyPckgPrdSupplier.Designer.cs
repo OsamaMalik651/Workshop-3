@@ -141,8 +141,10 @@ namespace Workshop_3
             this.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MaximumSize = new System.Drawing.Size(656, 344);
             this.MinimumSize = new System.Drawing.Size(656, 344);
             this.Name = "fromAddModifyPckgPrdSupplier";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fromAddModifyPckgPrdSupplier";
             this.Load += new System.EventHandler(this.fromAddModifyPckgPrdSupplier_Load);
             this.ResumeLayout(false);

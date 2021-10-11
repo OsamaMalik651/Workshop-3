@@ -393,15 +393,17 @@ namespace Workshop_3
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(64)))), ((int)(((byte)(80)))));
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1556, 820);
+            this.ClientSize = new System.Drawing.Size(1556, 798);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);
             this.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MaximumSize = new System.Drawing.Size(1574, 845);
             this.MinimumSize = new System.Drawing.Size(1574, 845);
             this.Name = "frmAddModifyPackage";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAddItem";
             this.Load += new System.EventHandler(this.frmAddModifyItem_Load);
             this.groupBox1.ResumeLayout(false);

@@ -69,7 +69,7 @@ namespace Workshop_3
             this.txtSupplierID.Location = new System.Drawing.Point(193, 41);
             this.txtSupplierID.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtSupplierID.Name = "txtSupplierID";
-            this.txtSupplierID.Size = new System.Drawing.Size(137, 34);
+            this.txtSupplierID.Size = new System.Drawing.Size(171, 34);
             this.txtSupplierID.TabIndex = 0;
             // 
             // txtSupplierName
@@ -80,6 +80,7 @@ namespace Workshop_3
             this.txtSupplierName.Name = "txtSupplierName";
             this.txtSupplierName.Size = new System.Drawing.Size(363, 34);
             this.txtSupplierName.TabIndex = 1;
+            this.txtSupplierName.Tag = "Supplier Name";
             // 
             // btnAccept
             // 
@@ -143,8 +144,10 @@ namespace Workshop_3
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MaximumSize = new System.Drawing.Size(600, 280);
             this.MinimumSize = new System.Drawing.Size(600, 280);
             this.Name = "frmAddModifySuppliers";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAddModifySuppliers";
             this.Load += new System.EventHandler(this.frmAddModifySuppliers_Load);
             this.ResumeLayout(false);

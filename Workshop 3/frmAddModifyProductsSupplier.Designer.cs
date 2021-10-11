@@ -177,6 +177,7 @@ namespace Workshop_3
             this.MaximumSize = new System.Drawing.Size(490, 290);
             this.MinimumSize = new System.Drawing.Size(490, 290);
             this.Name = "frmAddModifyProductsSupplier";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Modify Products Supplier";
             this.Load += new System.EventHandler(this.frmAddModifyProductsSupplier_Load);
             this.ResumeLayout(false);

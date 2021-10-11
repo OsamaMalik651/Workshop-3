@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TravelExpertsData
-{
+{   //Author: Sola Oyatunji and Osama Malik
     /// <summary>
     /// Sola Oyatunji(repository of methods that retrieves data and change product product supplier table)
     /// </summary>
@@ -40,7 +40,11 @@ namespace TravelExpertsData
             return packagesProductsSupplier;
         }
 
-
+        //Osama Malik
+        /// <summary> 
+        /// Method to Add Package Product suppliers to the database.
+        /// </summary>
+        /// <param name="PackageProductSuppliersList"> list of Package Product Suppliers to Add.</param>
         public static void Add(List<PackagesProductsSupplier> PackageProductSuppliersList)
         {
             using(TravelExperContext db = new TravelExperContext())
@@ -51,7 +55,10 @@ namespace TravelExpertsData
             
         }
 
-       
+       /// <summary>
+       /// Deletes an entry in Package Product supplier table
+       /// </summary>
+       /// <param name="selectedPackagesProductsSupplier">PackageProductSupplier to delete</param>
         public static void RemoveSupplier(PackagesProductsSupplier selectedPackagesProductsSupplier) //This function will be removed afterwards
         {
             using (TravelExperContext db = new TravelExperContext())
@@ -60,7 +67,11 @@ namespace TravelExpertsData
                 db.SaveChanges();
             }
         }
-
+        //OsamaMalik
+        /// <summary>
+        /// Method to Remove multiple Entries from Package Product supplier table
+        /// </summary> 
+        /// <param name="packageID"> Package Id to remove all product suppliers attached to it.</param>
         public static void RemoveAllEntries(int packageID)
         {
             TravelExperContext db = new TravelExperContext();

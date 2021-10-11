@@ -11,8 +11,11 @@ using TravelExpertsData;
 
 namespace Workshop_3
 {
+    //Author: OSama Malik
+    //Received guidance from Priya.
     public partial class fromAddModifyPckgPrdSupplier : Form
     {
+
         List<PackagesDTO> packages = PackageManager.GetPackages();
         List<ProductsSupplierDTO> productSupplier = ProductsSupplierManager.GetProductsSuppliers();
         List<SupplierDTO> suppliers = SupplierManager.GetSuppliers();

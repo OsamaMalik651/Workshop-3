@@ -119,8 +119,10 @@ namespace Workshop_3
             this.Controls.Add(this.label2);
             this.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximumSize = new System.Drawing.Size(1574, 845);
             this.MinimumSize = new System.Drawing.Size(620, 300);
             this.Name = "frmAddModifyProducts";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAddModifyProducts";
             this.Load += new System.EventHandler(this.frmAddModifyProducts_Load);
             this.ResumeLayout(false);
