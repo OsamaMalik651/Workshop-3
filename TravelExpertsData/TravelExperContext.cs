@@ -1,4 +1,12 @@
-﻿using System;
+﻿//Date: October 11, 2021
+//Projetc: PROJ - 009 - 003 – Project Workshop 3, Desktop Application
+
+//Group 1, Team 1:
+//Osama Malik		SAIT Student ID 880863
+//Tracy Crape		SAIT Student ID 420488
+//Adesola Oyatunji	SAIT Student ID 838997
+
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -45,9 +53,12 @@ namespace TravelExpertsData
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
 
 
-                /*optionsBuilder.UseSqlServer("Data Source=SAIT224513\\SQLEXPRESS;\nInitial Catalog=TravelExperts;\nIntegrated Security=True");*/
+                optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS01;\nInitial Catalog=TravelExperts;\nIntegrated Security=True");
 
-                optionsBuilder.UseSqlServer("Data Source=LAPTOP-RK06UI3M;\nInitial Catalog=TravelExperts;\nIntegrated Security=True");
+                //optionsBuilder.UseSqlServer("Data Source=SAIT224513\\SQLEXPRESS;\nInitial Catalog=TravelExperts;\nIntegrated Security=True");
+
+                //optionsBuilder.UseSqlServer("Data Source=LAPTOP-RK06UI3M;\nInitial Catalog=TravelExperts;\nIntegrated Security=True");
+
 
             }
         }
